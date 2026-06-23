@@ -30,9 +30,6 @@ public class CategoryService
         return categoryRepository.findById(categoryId);
     }
 
-    public List<Category> getProductByCategory(int categoryId){
-        return categoryRepository.findByCategoryId(categoryId);
-    }
 
     public Category create(Category category) {
         // create a new category
