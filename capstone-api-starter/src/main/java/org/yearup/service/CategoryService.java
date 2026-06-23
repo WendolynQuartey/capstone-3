@@ -45,8 +45,12 @@ public class CategoryService
         return null;
     }
 
-    public void delete(int categoryId)
-    {
+    public boolean delete(int categoryId) {
         // delete category
+        if (categoryRepository.existsById(categoryId)) {
+            categoryRepository.deleteById(categoryId);
+            return true;
+        }
+        return false;
     }
 }
