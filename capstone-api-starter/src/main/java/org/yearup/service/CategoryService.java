@@ -7,6 +7,7 @@ import org.yearup.models.Category;
 import org.yearup.repository.CategoryRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService
@@ -24,10 +25,10 @@ public class CategoryService
         return this.categoryRepository.findAll();
     }
 
-    public Category getById(int categoryId)
+    public Optional<Category> getById(int categoryId)
     {
         // get category by id
-        return null;
+        return categoryRepository.findById(categoryId);
     }
 
     public Category create(Category category)
