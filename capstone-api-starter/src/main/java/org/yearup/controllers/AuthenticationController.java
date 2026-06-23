@@ -69,22 +69,26 @@ public class AuthenticationController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<User> register(@Valid @RequestBody RegisterUserDto newUser) {
 
-        boolean exists = userService.exists(newUser.getUsername());
-        if (exists)
-        {
-            // duplicate username -> 400 (not a 500)
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Already Exists.");
+        try {
+            boolean exists = userService.exists(newUser.getUsername());
+            if (exists) {
+                // duplicate username -> 400 (not a 500)
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Already Exists.");
+            }
+
+            // create user
+            User user = userService.create(new User(0, newUser.getUsername(), newUser.getPassword(), newUser.getRole()));
+
+            // create profile
+            Profile profile = new Profile();
+            profile.setUserId(user.getId());
+            profileService.create(profile);
+
+            return new ResponseEntity<>(user, HttpStatus.CREATED);
         }
-
-        // create user
-        User user = userService.create(new User(0, newUser.getUsername(), newUser.getPassword(), newUser.getRole()));
-
-        // create profile
-        Profile profile = new Profile();
-        profile.setUserId(user.getId());
-        profileService.create(profile);
-
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Not Connected...");
+        }
     }
 
 }
