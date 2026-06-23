@@ -36,10 +36,14 @@ public class CategoryService
         return categoryRepository.save(category);
     }
 
-    public Category update(int categoryId, Category category)
-    {
+    public Optional<Category> update(int categoryId, Category category) {
         // update category and return the updated category
-        return null;
+        return categoryRepository.findById(categoryId).map(existing -> {
+        existing.setName(category.getName());
+        existing.setDescription(category.getDescription());
+        existing.setCategoryId(category.getCategoryId());
+        return categoryRepository.save(existing);
+    });
     }
 
     public boolean delete(int categoryId) {
