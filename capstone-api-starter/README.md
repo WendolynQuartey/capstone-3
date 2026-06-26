@@ -1,9 +1,9 @@
 # 🚊 Live-Line API
-A JPA controlled backend API for the app `Wu's Kloset` where admin and user functionality is seperated. Users can only read categories while Admins can post, delete, and update categories.
+A JPA controlled backend API for the app `Wu's Kloset` where admin and user functionality is seperated. Users can only access read routes while Admins can access post, delete, and update routes.
 
 ## Routes
 
-### 👤 Categories Routes
+### 🗂️ Categories Routes
 | Method 	 | Endpoint       	         | Description             	               | CRUD Operation 	 | Roles w/ Access |
 |----------|--------------------------|-----------------------------------------|------------------|-----------------|
 | POST   	 | /categories     	        | Create new category 	                   | Create         	 | Admin           |
