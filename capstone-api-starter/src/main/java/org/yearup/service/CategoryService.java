@@ -40,7 +40,6 @@ public class CategoryService
         return categoryRepository.findById(categoryId).map(existing -> {
             existing.setName(category.getName());
             existing.setDescription(category.getDescription());
-            existing.setCategoryId(category.getCategoryId());
             return categoryRepository.save(existing);
         });
     }
