@@ -31,7 +31,12 @@ public class CategoriesController
     }
 
 
-    // add the appropriate annotation for a get action
+    /**
+     * Gets all categories from the database.
+     * Endpoint requires no authentication.
+     *
+     * @return ResponseEntity containing a list of all categories with HTTP 200 OK status
+     */
     @GetMapping
     public ResponseEntity<List<Category>> getAll() {
         // find and return all categories
@@ -39,7 +44,14 @@ public class CategoriesController
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
-    // add the appropriate annotation for a get action
+    /**
+     * Gets a single category by its id.
+     * Endpoint requires no authentication.
+     *
+     * @param id The id of the category to get
+     * @return ResponseEntity containing the specific category with HTTP 200 OK if found,
+     *         or HTTP 404 Not Found if the category doesn't exist
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Category> getById(@PathVariable int id)
     {
@@ -49,16 +61,27 @@ public class CategoriesController
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // the url to return all products in category 1 would look like this
-    // https://localhost:8080/categories/1/products
+    /**
+     * Get all products that belong to a specific category.
+     * Example URL: https://localhost:8080/categories/1/products
+     * Endpoint requires no authentication.
+     *
+     * @param categoryId The id of the category whose products are to be retrieved
+     * @return ResponseEntity containing a list of products with HTTP 200 OK status
+     */
     @GetMapping("/{categoryId}/products")
     public ResponseEntity<List<Product>> getProductsById(@PathVariable int categoryId){
         // get a list of product by categoryId
         return ResponseEntity.ok(productService.getProductByCategory(categoryId));
     }
 
-    // add annotation to call this method for a POST action
-    // add annotation to ensure that only an ADMIN can call this function
+    /**
+     * Creates a new category in the system.
+     * Endpoint requires ADMIN role authorization.
+     *
+     * @param category The Category object containing the details of the category to create
+     * @return ResponseEntity containing the created Category object with HTTP 201 Created status
+     */
     @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Category> addCategory(@RequestBody Category category) {
@@ -67,7 +90,15 @@ public class CategoriesController
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    // add annotation to call this method for a PUT (update) action - the url path must include the categoryId
+    /**
+     * Updates an existing category by its id.
+     * Endpoint requires ADMIN role authorization.
+     *
+     * @param id The id of the category to update
+     * @param category The Category object containing the updated details
+     * @return ResponseEntity containing the updated category with HTTP 200 OK if successful,
+     *         or HTTP 404 Not Found if the category doesn't exist
+     */
     @PutMapping("/{id}")
     // add annotation to ensure that only an ADMIN can call this function
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -79,7 +110,14 @@ public class CategoriesController
     }
 
 
-    // add annotation to call this method for a DELETE action - the url path must include the categoryId
+    /**
+     * Deletes a category by its id.
+     * Endpoint requires ADMIN role authorization.
+     *
+     * @param id The id of the category to delete
+     * @return ResponseEntity with HTTP 204 No Content if deletion was successful,
+     *         or HTTP 404 Not Found if the category doesn't exist
+     */
     @DeleteMapping("/{id}")
     // add annotation to ensure that only an ADMIN can call this function
     @PreAuthorize("hasRole('ROLE_ADMIN')")
