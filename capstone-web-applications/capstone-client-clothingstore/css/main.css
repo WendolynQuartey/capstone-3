@@ -1,213 +1,615 @@
-header
-{
+/* Pink Theme - Clothing Store Style */
+:root {
+    --primary: #FF69B4;        /* Hot Pink */
+    --secondary: #FF1493;      /* Deep Pink */
+    --accent: #FFB6C1;         /* Light Pink */
+    --dark: #4A1942;           /* Dark Purple-Pink */
+    --light: #FFF0F5;          /* Lavender Blush */
+    --gradient-1: linear-gradient(135deg, #FF69B4, #FF1493, #FF6EB4);
+    --gradient-2: linear-gradient(135deg, #FFB6C1, #FF69B4, #FF1493);
+    --gradient-3: linear-gradient(135deg, #FFC0CB, #FF69B4, #FF1493);
+    --gradient-soft: linear-gradient(135deg, #FFE4E1, #FFB6C1, #FFC0CB);
+    --shadow: 0 8px 32px rgba(255, 105, 180, 0.25);
+    --shadow-strong: 0 12px 40px rgba(255, 20, 147, 0.35);
+}
+
+/* ===== HEADER - Pink Gradient ===== */
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     height: 10vh;
-
-    padding: 5px 15px;
-    border-bottom: solid 1px #e17055;
-    box-shadow: 5px 2px #e17055;
-    background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
-    color: #2d3436;
+    padding: 5px 30px;
+    background: linear-gradient(135deg, #FF69B4, #FF1493, #FF6EB4, #FF69B4);
+    background-size: 300% 300%;
+    animation: gradientShift 6s ease infinite;
+    color: white;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 25px rgba(255, 105, 180, 0.5);
+    position: relative;
+    z-index: 100;
 }
 
-header img
-{
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+header img {
     height: 100%;
+    filter: drop-shadow(0 2px 8px rgba(255, 20, 147, 0.3));
+    transition: transform 0.3s ease;
 }
 
-header div{
+header img:hover {
+    transform: scale(1.05) rotate(-3deg);
+}
+
+header div {
     height: 100%;
     display: flex;
     align-items: flex-end;
 }
 
-header #links
-{
-    gap: 20px;
+header #links {
+    gap: 25px;
     justify-content: flex-start;
     align-items: flex-end;
     padding-right: 20px;
 }
 
 header a {
-    color: #2d3436;
+    color: white;
     text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    text-shadow: 0 2px 4px rgba(74, 25, 66, 0.3);
+}
+
+header a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: #FFD700;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 header a:hover {
-    color: #e17055;
+    color: #FFD700;
+    transform: translateY(-2px);
 }
 
-header .cart
-{
+header a:hover::after {
+    width: 70%;
+}
+
+header a:active {
+    transform: scale(0.95);
+}
+
+header .cart {
     font-size: x-large;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 8px 20px;
     cursor: pointer;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    display: flex;
+    align-items: center;
 }
 
-header .cart #cart-items
-{
+header .cart:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+}
+
+header .cart #cart-items {
     font-size: .7em;
     height: 50%;
     align-items: start;
     padding-left: 5px;
+    color: #FFD700;
+    font-weight: 900;
 }
 
-main
-{
+/* ===== MAIN LAYOUT ===== */
+main {
     display: grid;
     grid-template-columns: 350px auto;
     margin-top: 15px;
     height: 87vh;
+    gap: 20px;
+    padding: 0 20px;
 }
 
-main > .filter-box
-{
+/* ===== FILTER BOX - Pink Theme ===== */
+main > .filter-box {
     width: 350px;
-    padding: 15px;
+    padding: 25px 20px;
+    background: linear-gradient(135deg, #FFF0F5, #FFE4E1, #FFB6C1);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    border: 2px solid var(--accent);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+main > .filter-box h4 {
+    color: var(--dark);
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+main > .filter-box .form-label {
+    font-weight: 600;
+    color: var(--dark);
+}
+
+main > .filter-box .form-control {
+    border: 2px solid #FFB6C1;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+main > .filter-box .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.2);
+}
+
+main > .filter-box .btn-primary {
+    background: var(--gradient-1);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+main > .filter-box .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-strong);
 }
 
 main #min-price .slider-selection {
-    background: #BABABA;
+    background: var(--gradient-1);
 }
 
-main > .content
-{
+/* ===== PRODUCT GRID ===== */
+main > .content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
     width: 100%;
     height: 87vh;
-    overflow: scroll;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
-main > .content-form
-{
+main > .content::-webkit-scrollbar {
+    width: 8px;
+}
+
+main > .content::-webkit-scrollbar-track {
+    background: #FFF0F5;
+    border-radius: 10px;
+}
+
+main > .content::-webkit-scrollbar-thumb {
+    background: var(--gradient-1);
+    border-radius: 10px;
+}
+
+/* ===== PRODUCT CARDS - Pink Theme ===== */
+.product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: white;
+    border: none;
+    padding: 15px;
+    border-radius: 20px;
+    margin: 0;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 350px;
+}
+
+.product::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient-1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-strong);
+}
+
+.product:hover::before {
+    opacity: 1;
+}
+
+.product .photo {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 15px 0;
+    gap: 5px;
+}
+
+.product .photo > img {
+    width: 33%;
+    cursor: pointer;
+    border: 2px solid #FFB6C1;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.product .photo > img:hover {
+    border-color: var(--primary);
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+}
+
+.product h5 {
+    font-weight: 700;
+    color: var(--dark);
+    margin: 10px 0 5px 0;
+}
+
+.product .price {
+    font-weight: 900;
+    font-size: 1.3rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 8px 0;
+}
+
+.product .add-button {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.product .add-button button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: var(--gradient-soft);
+    color: var(--dark);
+}
+
+.product .add-button button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+}
+
+.product .add-button .btn-warning {
+    background: var(--gradient-1);
+    color: white;
+}
+
+.product .add-button .btn-warning:hover {
+    box-shadow: 0 4px 20px rgba(255, 20, 147, 0.4);
+}
+
+/* ===== CART PAGE (content-form) - Pink Theme ===== */
+main > .content-form {
     display: flex;
     flex-direction: column;
     padding-right: 20px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow);
 }
 
 main > .content-form .cart-header,
-main > .content-form .cart-item
-{
-    border-bottom: solid 1px #ccc;
+main > .content-form .cart-item {
+    border-bottom: 2px solid #FFB6C1;
+    padding: 15px 0;
 }
 
-.content-form .photo
-{
+main > .content-form .cart-header {
+    background: var(--gradient-1);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 12px 12px 0 0;
+    margin: -20px -20px 0 -20px;
+    border-bottom: none;
+}
+
+main > .content-form .cart-header h5 {
+    margin: 0;
+    font-weight: 700;
+}
+
+.content-form .photo {
     display: flex;
-    gap: 10px;
-}
-
-.content-form .photo img
-{
-    width: 100px;
-    cursor: pointer;
-    border: solid 1px #ccc;
-}
-
-.content-form .cart-header
-{
-    display: flex;
-    justify-content: space-between;
+    gap: 15px;
     align-items: center;
 }
 
-.content-form .cart-total
-{
-    margin: 10px 0;
-    color: maroon;
-}
-
-.product
-{
-    display: flex;
-    flex-direction: column;
-
-    justify-content: space-between;
-    /*width: 30%;*/
-    border: solid 1px #ccc;
-    padding: 5px;
-    border-radius: 5px;
-    margin: 5px;
-}
-.product  .photo
-{
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px 10px 10px;
-}
-.product  .photo > img
-{
-    width: 33%;
+.content-form .photo img {
+    width: 100px;
     cursor: pointer;
-    border: solid 1px #ccc;
+    border: 2px solid #FFB6C1;
+    border-radius: 12px;
+    transition: all 0.3s ease;
 }
 
-.product .price
-{
+.content-form .photo img:hover {
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+.content-form .cart-total {
+    margin: 20px 0;
+    font-size: 1.5rem;
     font-weight: 900;
-    color: #e17055;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding: 15px;
+    border-top: 3px solid var(--accent);
 }
 
-.modal-body img
-{
-    width:100%;
-}
-
-.product > .add-button
-{
-    display: flex;
-}
-
-.visible
-{
-    display: block;
-}
-
-.hidden
-{
-    display: none !important;
-}
-
-.modal
-{
+/* ===== MODAL - Pink Theme ===== */
+.modal {
     display: flex;
     justify-content: center;
-    position: absolute;
+    align-items: center;
+    position: fixed;
     top: 0;
-    background-color: #777777aa;
+    left: 0;
+    background: rgba(74, 25, 66, 0.7);
+    backdrop-filter: blur(8px);
     width: 100vw;
     height: 100vh;
     z-index: 1000;
     padding: 30px;
+    animation: fadeIn 0.3s ease;
 }
 
-.modal-dialog
-{
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-dialog {
     width: 50vw;
+    max-width: 600px;
+    background: white;
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(74, 25, 66, 0.3);
+    animation: slideUp 0.4s ease;
 }
 
-#errors
-{
-    position: absolute;
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-body img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.modal-header {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.modal-header h5 {
+    font-weight: 700;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.modal-footer .btn {
+    border-radius: 12px;
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: all 0.3s ease;
+}
+
+.modal-footer .btn-secondary {
+    background: #FFE4E1;
+    border: none;
+    color: var(--dark);
+}
+
+.modal-footer .btn-secondary:hover {
+    background: #FFB6C1;
+    transform: scale(1.02);
+}
+
+.modal-footer .btn-primary {
+    background: var(--gradient-1);
+    border: none;
+    color: white;
+}
+
+.modal-footer .btn-primary:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-strong);
+}
+
+/* ===== UTILITY CLASSES ===== */
+.visible {
+    display: block !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===== ALERTS / ERRORS - Pink Theme ===== */
+#errors {
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     width: 100vw;
-    padding-top: 5px;
-    opacity: 90%;
-}
-#errors > div{
-    width: 33vw;
+    padding: 10px 20px;
+    opacity: 95%;
+    z-index: 2000;
+    pointer-events: none;
+    top: 10vh;
 }
 
-.alert
-{
-    margin-bottom: 2px !important;
+#errors > div {
+    width: 33vw;
+    min-width: 300px;
+    pointer-events: auto;
+    animation: slideInRight 0.5s ease;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.alert {
+    margin-bottom: 10px !important;
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+    padding: 15px 20px !important;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #FFB6C1, #FF69B4) !important;
+    color: #4A1942 !important;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #FF1493, #FF69B4) !important;
+    color: white !important;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #FFC0CB, #FF69B4) !important;
+    color: #4A1942 !important;
+}
+
+/* ===== RESPONSIVE TWEAKS ===== */
+@media (max-width: 1024px) {
+    main > .content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    main > .content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    header {
+        padding: 5px 15px;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 10vh;
+    }
+
+    header #links {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .modal-dialog {
+        width: 90vw;
+    }
+}
+
+@media (max-width: 480px) {
+    main > .content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== EXTRA PINK TOUCHES ===== */
+
+/* Add a subtle pink glow to buttons */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+}
+
+/* Pink selection color */
+::selection {
+    background: #FF69B4;
+    color: white;
+}
+
+/* Pink border on focus for all inputs */
+input:focus, select:focus, textarea:focus {
+    border-color: #FF69B4 !important;
+    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.15) !important;
+}
+
+/* Pink accent for cart items */
+.cart-item {
+    border-left: 4px solid #FF69B4;
+    padding-left: 15px !important;
+}
+
+/* Heart-shaped decorative element for product cards */
+.product .heart-icon {
+    color: #FF69B4;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.product .heart-icon:hover {
+    transform: scale(1.3);
+    color: #FF1493;
 }
 
