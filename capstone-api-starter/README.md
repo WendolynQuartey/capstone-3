@@ -1,4 +1,4 @@
-# 🚊 Live-Line API
+# 🏬 Wu's Kloset API
 A JPA controlled backend API for the app `Wu's Kloset` where admin and user functionality is seperated. Users can only access read routes while Admins can access post, delete, and update routes.
 
 ## Routes
