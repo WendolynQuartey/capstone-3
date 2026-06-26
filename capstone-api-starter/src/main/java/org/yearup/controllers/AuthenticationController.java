@@ -68,8 +68,6 @@ public class AuthenticationController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<User> register(@Valid @RequestBody RegisterUserDto newUser) {
-
-        try {
             boolean exists = userService.exists(newUser.getUsername());
             if (exists) {
                 // duplicate username -> 400 (not a 500)
@@ -86,9 +84,4 @@ public class AuthenticationController {
 
             return new ResponseEntity<>(user, HttpStatus.CREATED);
         }
-        catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Not Connected...");
-        }
-    }
-
 }
