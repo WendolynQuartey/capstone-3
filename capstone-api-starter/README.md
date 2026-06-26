@@ -21,3 +21,6 @@ A JPA controlled backend API for the app `Wu's Kloset` where admin and user func
 | GET    	 | /products/{id} 	 | Get product by ID          	           | Read           	 | All             |
 | PUT    	 | /prodcuts/{id} 	 | Update product info     	              | Update         	 | Admin           |
 | DELETE 	 | /products/{id} 	 | Delete product     	                   | Delete         	 | Admin           |
+
+
+## Favorite Line 

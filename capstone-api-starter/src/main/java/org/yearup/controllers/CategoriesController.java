@@ -12,6 +12,7 @@ import org.yearup.service.CategoryService;
 import org.yearup.service.ProductService;
 
 import java.util.List;
+import java.util.Optional;
 
 // add the annotations to make this a REST controller
 @RestController
@@ -72,12 +73,11 @@ public class CategoriesController
     @PutMapping("/{id}")
     // add annotation to ensure that only an ADMIN can call this function
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Category updateCategory(@PathVariable int id, @RequestBody Category category) {
+    public ResponseEntity<Category> updateCategory(@PathVariable int id, @RequestBody Category category) {
         // update the category by id and return the updated category (200 OK)
-        if (categoryService.getById(id) == null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-
-        return categoryService.update(id, category);
+        return categoryService.update(id,category)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
 
